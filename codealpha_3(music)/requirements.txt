@@ -1,0 +1,6 @@
+torch --index-url https://download.pytorch.org/whl/cpu
+music21
+flask
+numpy
+mido
+requests

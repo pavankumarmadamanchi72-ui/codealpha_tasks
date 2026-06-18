@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity AI Music Composer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Tone.js for web audio synthesis -->
+    <script src="/static/Tone.js"></script>
+    <!-- @tonejs/midi to parse midi files in browser -->
+    <script src="/static/Midi.js"></script>
+</head>
+<body>
+    <div class="glass-bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-wand-magic-sparkles magic-icon"></i>
+                <h1>Antigravity <span>AI Composer</span></h1>
+            </div>
+            <p class="subtitle">Deep learning MIDI music generator utilizing PyTorch LSTMs</p>
+        </header>
+
+        <!-- Main Dashboard Layout -->
+        <div class="dashboard-grid">
+            <!-- Left Panel: Control & Generation -->
+            <div class="panel-column">
+                <!-- Composer Controls -->
+                <div class="glass-card card-composer">
+                    <h2 class="card-title"><i class="fa-solid fa-sliders"></i> Generator Settings</h2>
+                    
+                    <div class="form-group">
+                        <label for="genre">Musical Style</label>
+                        <select id="genre" class="styled-select">
+                            <option value="classical">Classical Piano</option>
+                            <option value="jazz">Jazz Improvisation</option>
+                            <option value="ambient">Ambient Melody</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-val">
+                            <label for="temperature">Creativity (Temperature)</label>
+                            <span id="temp-val" class="slider-badge">0.8</span>
+                        </div>
+                        <input type="range" id="temperature" min="0.2" max="1.5" step="0.05" value="0.8" class="styled-slider">
+                        <span class="slider-help">Lower = structured & repetitive; Higher = random & experimental.</span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label-val">
+                            <label for="notes-count">Sequence Length (Notes)</label>
+                            <span id="notes-val" class="slider-badge">120</span>
+                        </div>
+                        <input type="range" id="notes-count" min="40" max="300" step="10" value="120" class="styled-slider">
+                    </div>
+
+                    <button id="btn-generate" class="btn btn-primary btn-glow">
+                        <i class="fa-solid fa-music"></i> Generate New Track
+                    </button>
+                </div>
+
+                <!-- Training & Dataset Management -->
+                <div class="glass-card card-training">
+                    <h2 class="card-title"><i class="fa-solid fa-brain"></i> Model Training</h2>
+                    
+                    <!-- Library Status Info -->
+                    <div class="status-grid">
+                        <div class="status-stat">
+                            <span class="stat-lbl">MIDI Dataset</span>
+                            <span id="stat-midi-count" class="stat-val">0 files</span>
+                        </div>
+                        <div class="status-stat">
+                            <span class="stat-lbl">Model Status</span>
+                            <span id="stat-model-status" class="stat-val status-badge badge-red">Untrained</span>
+                        </div>
+                    </div>
+
+                    <!-- Setup action buttons -->
+                    <div class="training-setup-actions">
+                        <button id="btn-download-samples" class="btn btn-secondary">
+                            <i class="fa-solid fa-download"></i> Load Sample MIDI Dataset
+                        </button>
+                    </div>
+
+                    <!-- File Upload Dropzone -->
+                    <div class="upload-zone" id="drop-zone">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <p>Drag & drop MIDI files here or <span>browse</span></p>
+                        <span class="upload-subtext">Supported formats: .mid, .midi</span>
+                    </div>
+                    <input type="file" id="file-input" accept=".mid,.midi" multiple style="display: none;">
+                    <div id="upload-progress" class="upload-progress-container" style="display: none;">
+                        <span id="upload-filename">uploading...</span>
+                        <div class="mini-progress-bar"><div class="mini-progress-fill" style="width: 0%"></div></div>
+                    </div>
+
+                    <!-- Training Controls -->
+                    <div class="training-hyperparams">
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="train-epochs">Epochs</label>
+                                <input type="number" id="train-epochs" min="1" max="100" value="15" class="styled-input">
+                            </div>
+                            <div class="form-group col">
+                                <label for="train-lr">Learning Rate</label>
+                                <input type="number" id="train-lr" min="0.0001" max="0.1" step="0.0005" value="0.005" class="styled-input">
+                            </div>
+                        </div>
+                        <button id="btn-train" class="btn btn-accent w-100">
+                            <i class="fa-solid fa-play"></i> Train AI Network
+                        </button>
+                    </div>
+
+                    <!-- Live training logs (Terminal console) -->
+                    <div id="training-console" class="training-console" style="display: none;">
+                        <div class="console-header">
+                            <span><i class="fa-solid fa-terminal"></i> Training Log Output</span>
+                            <span id="console-status-lbl">preprocessing...</span>
+                        </div>
+                        <div class="console-body" id="console-log-lines">
+                            <!-- Logs injected here -->
+                        </div>
+                        <div class="console-progress-container">
+                            <div class="console-progress-bar">
+                                <div id="console-progress-fill" class="console-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <div class="console-progress-stats">
+                                <span>Loss: <strong id="console-loss-val">--</strong></span>
+                                <span>Epoch Progress: <strong id="console-epoch-val">0/0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Player & History -->
+            <div class="panel-column">
+                <!-- Live DAW Player & Visualizer -->
+                <div class="glass-card card-player">
+                    <div class="player-header">
+                        <h2 class="card-title"><i class="fa-solid fa-circle-play"></i> MIDI Player & Visualizer</h2>
+                        <span id="current-track-name" class="current-track-tag">No Track Loaded</span>
+                    </div>
+
+                    <!-- Piano Roll Visualizer Canvas -->
+                    <div class="visualizer-container">
+                        <canvas id="piano-roll-canvas"></canvas>
+                        <div id="visualizer-overlay" class="visualizer-overlay">
+                            <i class="fa-solid fa-music play-prompt-icon"></i>
+                            <p>Generate or load a track to visualize playback</p>
+                        </div>
+                    </div>
+
+                    <!-- Player Controls -->
+                    <div class="audio-controls-row">
+                        <button id="btn-playback-play" class="btn-control play" disabled>
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+                        <button id="btn-playback-stop" class="btn-control stop" disabled>
+                            <i class="fa-solid fa-stop"></i>
+                        </button>
+                        
+                        <!-- Timeline / Progress -->
+                        <div class="timeline-container">
+                            <span id="time-current">0:00</span>
+                            <div class="timeline-slider-bg" id="timeline-slider">
+                                <div id="timeline-progress" class="timeline-progress-fill"></div>
+                            </div>
+                            <span id="time-total">0:00</span>
+                        </div>
+
+                        <!-- Player Download Button -->
+                        <a id="btn-player-download" href="#" download class="btn-icon" style="opacity: 0.3; pointer-events: none; text-decoration: none;" title="Download MIDI Output">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+
+                        <!-- Volume -->
+                        <div class="volume-container">
+                            <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+                            <input type="range" id="volume-slider" min="-30" max="10" step="1" value="0" class="vol-slider">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track History Library -->
+                <div class="glass-card card-history">
+                    <h2 class="card-title"><i class="fa-solid fa-list-ul"></i> Composer Library</h2>
+                    <div class="library-container" id="library-list">
+                        <!-- History items populated dynamically -->
+                        <div class="empty-library">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <p>No generated tracks in library. Generate a track to get started.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert system -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
