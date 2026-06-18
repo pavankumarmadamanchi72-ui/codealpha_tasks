@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "category": "Setup & Getting Started",
+    "question": "How do I set up my Aura Smart Home Hub for the first time?",
+    "answer": "Setting up your Aura Smart Home Hub is simple:\n1. **Unbox** the hub and plug the power adapter into an outlet.\n2. **Connect** the hub to your internet router using the provided Ethernet cable (recommended for initial setup) or position it close to your Wi-Fi router.\n3. **Download** the Aura Smart Home app from the Apple App Store or Google Play Store.\n4. **Create** an account or log in.\n5. Tap **Add Device** (+ icon) in the app, select **Aura Hub**, and follow the on-screen pairing instructions.",
+    "suggestions": [
+      "What do the LED lights on the Hub mean?",
+      "Is a Wi-Fi connection required for setup?"
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Setup & Getting Started",
+    "question": "What do the LED status lights on the Aura Hub mean?",
+    "answer": "The LED light ring on the top of the Aura Hub communicates its current state:\n- **Pulsing Blue**: Ready to connect / Setup mode.\n- **Solid Teal**: Successfully connected to the internet and operating normally.\n- **Blinking Amber**: Weak internet connection or disconnected. Check your router.\n- **Pulsing Red**: System error or update failure. Try power cycling the device.\n- **Pulsing Purple**: Software update in progress. Please do not unplug the hub.",
+    "suggestions": [
+      "How do I reset my Aura Hub?",
+      "How do I set up my Aura Smart Home Hub for the first time?"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "Setup & Getting Started",
+    "question": "Is a Wi-Fi or internet connection required for setup and operation?",
+    "answer": "Yes, an internet connection is required for initial setup, registering devices, and enabling remote control outside your home. However, once setup is complete, local automations (like motion sensors triggering lights) will continue to work even if your internet goes down.",
+    "suggestions": [
+      "Does Aura support 5GHz Wi-Fi networks?",
+      "How do I set up my Aura Smart Home Hub for the first time?"
+    ]
+  },
+  {
+    "id": 4,
+    "category": "Compatibility & Integration",
+    "question": "Does the Aura Hub support 5GHz Wi-Fi networks?",
+    "answer": "The Aura Hub supports both **2.4GHz and 5GHz Wi-Fi networks** (dual-band 802.11ac). During setup, we recommend connecting your phone to the specific Wi-Fi band you want the hub to use.",
+    "suggestions": [
+      "What smart home protocols does Aura support?",
+      "Does Aura support Apple HomeKit?"
+    ]
+  },
+  {
+    "id": 5,
+    "category": "Compatibility & Integration",
+    "question": "What smart home protocols does the Aura Hub support?",
+    "answer": "The Aura Hub is a multi-protocol hub supporting a wide range of standards:\n- **Zigbee 3.0**\n- **Z-Wave Plus**\n- **Thread / Matter**\n- **Bluetooth Low Energy (BLE)**\n- **Wi-Fi** (dual-band)\nThis allows it to connect to thousands of smart bulbs, plugs, thermostats, locks, and sensors from various brands.",
+    "suggestions": [
+      "Does Aura support Apple HomeKit?",
+      "Does Aura integrate with Google Assistant and Amazon Alexa?"
+    ]
+  },
+  {
+    "id": 6,
+    "category": "Compatibility & Integration",
+    "question": "Does Aura integrate with Google Assistant and Amazon Alexa?",
+    "answer": "Yes! Aura has official smart home skills for both Amazon Alexa and Google Assistant. Once connected in their respective apps, you can control your lights, thermostats, and scenes using voice commands like, *'Alexa, turn on the living room lights.'*",
+    "suggestions": [
+      "Does Aura support Apple HomeKit?",
+      "What voice commands can I use?"
+    ]
+  },
+  {
+    "id": 7,
+    "category": "Compatibility & Integration",
+    "question": "Does Aura support Apple HomeKit?",
+    "answer": "Yes, the Aura Hub is Matter-compatible and supports Apple HomeKit. You can pair it with your Apple Home app by scanning the HomeKit/Matter setup code located on the bottom of the hub.",
+    "suggestions": [
+      "What smart home protocols does Aura support?",
+      "Does Aura integrate with Google Assistant and Amazon Alexa?"
+    ]
+  },
+  {
+    "id": 8,
+    "category": "Security & Privacy",
+    "question": "How does Aura protect my smart home data and privacy?",
+    "answer": "Privacy and security are core design principles for Aura:\n- **Local Execution**: All of your automations, schedules, and device linkages are processed locally on the hub, meaning your daily patterns are not uploaded to the cloud.\n- **End-to-End Encryption**: All data transmitted between your hub, the Aura cloud services, and your mobile app uses bank-grade TLS 1.3 encryption.\n- **Hardware Security**: The hub features a built-in Secure Element chip to prevent physical tampering and store cryptographic keys.",
+    "suggestions": [
+      "Is there a monthly subscription fee?",
+      "Where are my camera feeds stored?"
+    ]
+  },
+  {
+    "id": 9,
+    "category": "Security & Privacy",
+    "question": "Where are my smart camera feeds and recordings stored?",
+    "answer": "Aura offers two options for video storage:\n1. **Local Storage (No Subscription)**: You can insert a microSD card (up to 256GB, sold separately) directly into the Aura Hub to store encrypted, locally recorded clips.\n2. **Aura Cloud Storage (Optional Subscription)**: You can subscribe to Aura Secure Cloud for end-to-end encrypted backup of your video recordings, accessible anywhere in the world.",
+    "suggestions": [
+      "How does Aura protect my smart home data and privacy?",
+      "Is there a monthly subscription fee?"
+    ]
+  },
+  {
+    "id": 10,
+    "category": "Billing & Subscriptions",
+    "question": "Is there a monthly subscription fee to use the Aura Hub?",
+    "answer": "No! There is **no subscription required** to use the Aura Smart Home Hub. All core features—including remote control, push notifications, scheduling, device compatibility, local automations, and local microSD card storage—are completely free. \n\nWe do offer an optional **Aura Protect** subscription ($4.99/month) which adds cloud video recording history (14 days), advanced AI vehicle/pet detection for cameras, and cellular backup for the hub.",
+    "suggestions": [
+      "Where are my camera feeds stored?",
+      "How does Aura protect my smart home data and privacy?"
+    ]
+  },
+  {
+    "id": 11,
+    "category": "Troubleshooting & Reset",
+    "question": "How do I factory reset my Aura Smart Home Hub?",
+    "answer": "To factory reset your Aura Hub:\n1. Locate the small **Reset pinhole** on the back of the hub next to the power port.\n2. Using a paperclip or SIM ejector tool, press and hold the button inside the pinhole for **15 seconds**.\n3. The LED ring will start blinking **Red**.\n4. Release the button. The hub will reboot and the LED ring will pulse **Blue**, indicating it is ready to be set up as new.\n\n*Warning: A factory reset deletes all paired devices, automations, and configurations. This cannot be undone.*",
+    "suggestions": [
+      "How do I set up my Aura Smart Home Hub for the first time?",
+      "What do the LED lights on the Hub mean?"
+    ]
+  },
+  {
+    "id": 12,
+    "category": "Troubleshooting & Reset",
+    "question": "What should I do if my Aura Hub keeps disconnecting from Wi-Fi?",
+    "answer": "If your hub frequently loses its Wi-Fi connection, try these steps:\n1. **Check Signal Strength**: Ensure the hub is placed within reasonable range of your router, away from thick concrete walls or metal appliances.\n2. **Use Ethernet**: If possible, connect the hub directly to your router with an Ethernet cable to eliminate wireless interference.\n3. **Power Cycle**: Unplug the power adapter for 30 seconds, then plug it back in.\n4. **Check Band Steering**: Some routers combine 2.4GHz and 5GHz into one SSID. If possible, set up a dedicated 2.4GHz network or disable band steering temporarily during pairing.",
+    "suggestions": [
+      "What do the LED lights on the Hub mean?",
+      "How do I factory reset my Aura Smart Home Hub?"
+    ]
+  }
+]

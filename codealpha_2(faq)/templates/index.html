@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Assistant - FAQ & Support Chatbot</title>
+    <meta name="description" content="Get instant answers about the Aura Smart Home Hub. Chat with our intelligent FAQ assistant to configure and troubleshoot your smart home ecosystem.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar for FAQ navigation -->
+        <aside class="sidebar" id="faq-sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">✦</span>
+                    <h1>Aura Support</h1>
+                </div>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="faq-search" placeholder="Search categories..." autocomplete="off">
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <div class="faq-explorer" id="faq-explorer-container">
+                <div class="loading-spinner">Loading categories...</div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <p>Aura Hub v2.4.1</p>
+                <p>Local Connection Secure</p>
+            </div>
+        </aside>
+        
+        <!-- Main Chat Area -->
+        <main class="chat-area">
+            <header class="chat-header">
+                <div class="header-status">
+                    <div class="status-indicator online"></div>
+                    <div>
+                        <h2>Aura Smart Assistant</h2>
+                        <p class="status-text">Online | Powered by NLP</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="clear-chat-btn" title="Clear Chat History">Clear Chat</button>
+                </div>
+            </header>
+            
+            <div class="chat-messages" id="chat-messages-container">
+                <!-- Welcome Message -->
+                <div class="message bot-message">
+                    <div class="avatar">✦</div>
+                    <div class="message-bubble">
+                        <p>Hi there! I am Aura's Smart Assistant. Ask me anything about setting up, securing, or troubleshooting your Aura Smart Home Hub.</p>
+                        <p>Here are some popular topics to get you started:</p>
+                        <div class="suggestion-chips">
+                            <button class="chip" onclick="sendSuggestion('How do I set up my Aura Smart Home Hub for the first time?')">First-time Setup</button>
+                            <button class="chip" onclick="sendSuggestion('Does Aura support Apple HomeKit?')">Apple HomeKit Support</button>
+                            <button class="chip" onclick="sendSuggestion('Is there a monthly subscription fee?')">Subscriptions & Fees</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator-wrapper" id="typing-indicator" style="display: none;">
+                <div class="avatar">✦</div>
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <footer class="chat-input-area">
+                <form id="chat-form" class="input-container">
+                    <input type="text" id="user-input" placeholder="Ask a question about Aura..." autocomplete="off" required>
+                    <button type="submit" id="send-btn" class="send-button" aria-label="Send Message">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </footer>
+        </main>
+    </div>
+    
+    <!-- Client Application JavaScript -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
